@@ -1,5 +1,5 @@
 export const SELECT_LOCATION = 'SELECT_LOCATION';
-export const SET_RADIUS = 'SET_RADIUS';
+export const SELECT_LOCATION_RADIUS = 'SELECT_LOCATION_RADIUS';
 
 export function selectLocation(lat, lng) {
   return {
@@ -9,9 +9,9 @@ export function selectLocation(lat, lng) {
   };
 }
 
-export function setRadius(radius) {
+export function selectLocationRadius(radius) {
   return {
-    type: SET_RADIUS,
+    type: SELECT_LOCATION_RADIUS,
     radius
   };
 }

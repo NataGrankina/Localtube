@@ -1,4 +1,4 @@
-import { SELECT_LOCATION, SET_RADIUS } from 'actions/mapActions';
+import { SELECT_LOCATION, SELECT_LOCATION_RADIUS } from 'actions/mapActions';
 
 const initialState = {
   lat: 59.95,
@@ -14,7 +14,7 @@ export default (state = initialState, action = {}) => {
         lat: action.lat,
         lng: action.lng
       };
-    case SET_RADIUS:
+    case SELECT_LOCATION_RADIUS:
       return {
         ...state,
         radius: action.radius

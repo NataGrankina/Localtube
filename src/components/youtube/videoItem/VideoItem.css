@@ -1,0 +1,8 @@
+.Item-container {
+  display: flex;
+  flex: 1;
+}
+
+.Item-details {
+  flex: 1;
+}

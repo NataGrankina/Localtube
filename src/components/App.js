@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import Map from 'components/map';
+import VideoList from 'components/youtube/videoList';
 import './App.css';
 
 class App extends Component {
@@ -11,6 +12,9 @@ class App extends Component {
         </header>
         <div className="App-map">
           <Map />
+        </div>
+        <div>
+          <VideoList />
         </div>
       </div>
     );

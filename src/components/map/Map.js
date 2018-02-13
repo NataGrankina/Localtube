@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import GoogleMap from 'google-map-react';
+import { API_KEY } from 'config';
 import LocationMarker from './locationMarker';
 
 export default class Map extends Component {
@@ -27,6 +28,7 @@ export default class Map extends Component {
     const { lat, lng } = this.props;
     return (
       <GoogleMap
+        bootstrapURLKeys={{ key: API_KEY }}
         center={{ lat, lng }}
         defaultZoom={11}
         onClick={this.onMapClick}
