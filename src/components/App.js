@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import Map from 'components/map';
 import './App.css';
 
 class App extends Component {
@@ -6,11 +7,11 @@ class App extends Component {
     return (
       <div className="App">
         <header className="App-header">
-          <h1 className="App-title">Welcome to React</h1>
+          <h1 className="App-title">Localtube</h1>
         </header>
-        <p className="App-intro">
-          To get started, edit <code>src/App.js</code> and save to reload.
-        </p>
+        <div className="App-map">
+          <Map />
+        </div>
       </div>
     );
   }

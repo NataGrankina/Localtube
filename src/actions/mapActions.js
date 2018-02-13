@@ -1,9 +1,9 @@
-export const SET_LOCATION = 'SELECT_LOCATION';
+export const SELECT_LOCATION = 'SELECT_LOCATION';
 export const SET_RADIUS = 'SET_RADIUS';
 
 export function selectLocation(lat, lng) {
   return {
-    type: SET_LOCATION,
+    type: SELECT_LOCATION,
     lat,
     lng
   };
