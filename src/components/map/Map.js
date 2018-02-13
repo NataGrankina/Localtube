@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import GoogleMap from 'google-map-react';
+import LocationMarker from './locationMarker';
 
 export default class Map extends Component {
   static props = {
@@ -18,8 +19,20 @@ export default class Map extends Component {
     }
   }
 
+  onMapClick = ({ lat, lng }) => {
+    this.props.selectLocation(lat, lng);
+  };
+
   render() {
     const { lat, lng } = this.props;
-    return <GoogleMap center={{ lat, lng }} defaultZoom={11} />;
+    return (
+      <GoogleMap
+        center={{ lat, lng }}
+        defaultZoom={11}
+        onClick={this.onMapClick}
+      >
+        <LocationMarker lat={lat} lng={lng} />
+      </GoogleMap>
+    );
   }
 }
