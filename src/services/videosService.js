@@ -1,12 +1,13 @@
 import axios from 'axios';
 import { GOOGLE_API_KEY, YOUTUBE_API_URL } from 'config';
+import { VIDEO_RATING_TYPES } from 'utils';
 
 const client = axios.create({
   baseURL: YOUTUBE_API_URL,
   timeout: 1000
 });
 
-function transformServerResponse({ data }) {
+function transformVideosResponse({ data }) {
   const { items } = data;
 
   return items.map((item) => {
@@ -41,19 +42,65 @@ function loadVideosByLocation(ltd, lng, radius) {
         key: GOOGLE_API_KEY
       }
     })
-    .then(transformServerResponse);
+    .then(transformVideosResponse);
 }
 
-function rateVideo(id, rating) {
-  client.post('videos/rate', {
+function rateVideo(token, id, rating) {
+  if (!token) {
+    throw new Error('Only authorized users can rate a video. Please login.');
+  }
+  return client.post('videos/rate', null, {
+    headers: { Authorization: token },
     params: {
       id,
-      rating
+      rating,
+      key: GOOGLE_API_KEY
     }
   });
 }
 
+function loadVideoStatistics(id) {
+  return client
+    .get('videos', {
+      params: {
+        id,
+        part: 'statistics',
+        key: GOOGLE_API_KEY
+      }
+    })
+    .then(({ data: { items } }) => items[0].statistics);
+}
+
+function loadUserVideoRating(token, id) {
+  if (!token) {
+    throw new Error('Only authorized users can access their ratings. Please login.');
+  }
+
+  return client
+    .get('videos/getRating', {
+      headers: { Authorization: token },
+      params: {
+        id,
+        key: GOOGLE_API_KEY
+      }
+    })
+    .then(({ data: { items } }) => items[0].rating);
+}
+
+function loadVideoRating(token, id) {
+  const promises = [loadVideoStatistics(id)];
+  if (token) {
+    promises.push(loadUserVideoRating(token, id));
+  }
+
+  return Promise.all(promises).then(([statistics, userRating = VIDEO_RATING_TYPES.NONE]) => ({
+    statistics,
+    userRating
+  }));
+}
+
 export default {
   loadVideosByLocation,
+  loadVideoRating,
   rateVideo
 };

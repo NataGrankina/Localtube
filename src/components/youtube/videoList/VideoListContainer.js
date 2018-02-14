@@ -1,17 +1,25 @@
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import { rateVideo } from 'actions/youtubeActions';
+import { expandVideoDetails, rateVideoRequest } from 'actions/youtubeActions';
 import VideoList from './VideoList';
 
 const mapStateToProps = (state) => {
-  const { youtube: { videos, isLoading, error } } = state;
-  return { videos, isLoading, error };
+  const {
+    youtube: { videosList: { videos, isLoading, error }, expandedVideo }
+  } = state;
+  return {
+    videos,
+    expandedVideo,
+    isLoading,
+    error
+  };
 };
 
 const mapDispatchToProps = dispatch =>
   bindActionCreators(
     {
-      rateVideo
+      expandVideoDetails,
+      rateVideo: rateVideoRequest
     },
     dispatch
   );

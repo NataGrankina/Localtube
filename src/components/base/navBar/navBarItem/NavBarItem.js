@@ -23,7 +23,7 @@ export default function NavBarItem(props) {
 
 NavBarItem.propTypes = {
   pullRight: PropTypes.bool,
-  onClick: PropTypes.func.isRequired
+  onClick: PropTypes.func
 };
 
 NavBarItem.defaultProps = {
