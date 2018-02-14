@@ -4,21 +4,19 @@ import {
   loadVideosByLocationSuccess,
   loadVideosByLocationFailure
 } from 'actions/youtubeActions';
-import services from 'services';
-
-const { videosSevice } = services;
+import { videosService } from 'services';
 
 function* loadVideosByLocation({ lat, lng, radius }) {
   try {
     const videos = yield call(
-      videosSevice.loadVideosByLocation,
+      videosService.loadVideosByLocation,
       lat,
       lng,
       radius
     );
     yield put(loadVideosByLocationSuccess(videos));
   } catch (error) {
-    yield put(loadVideosByLocationFailure(error.message));
+    yield put(loadVideosByLocationFailure(error));
   }
 }
 

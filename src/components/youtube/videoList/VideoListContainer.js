@@ -1,6 +1,6 @@
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import { likeVideo } from 'actions/youtubeActions';
+import { rateVideo } from 'actions/youtubeActions';
 import VideoList from './VideoList';
 
 const mapStateToProps = (state) => {
@@ -11,7 +11,7 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = dispatch =>
   bindActionCreators(
     {
-      likeVideo
+      rateVideo
     },
     dispatch
   );

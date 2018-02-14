@@ -1,0 +1,8 @@
+.NavBarHeader {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+  float: left;
+  height: 90px;
+}

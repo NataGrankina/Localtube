@@ -3,7 +3,7 @@ export const LOAD_VIDEOS_BY_LOCATION = {
   SUCCESS: 'LOAD_VIDEOS_BY_LOCATION.SUCCESS',
   FAILURE: 'LOAD_VIDEOS_BY_LOCATION.FAILURE'
 };
-export const LIKE_VIDEO = 'LIKE_VIDEO';
+export const RATE_VIDEO = 'RATE_VIDEO';
 
 export function loadVideosByLocationRequest(lat, lng, radius) {
   return {
@@ -28,9 +28,10 @@ export function loadVideosByLocationFailure(error) {
   };
 }
 
-export function likeVideo(id) {
+export function rateVideo(id, rate) {
   return {
-    type: LIKE_VIDEO,
-    id
+    type: RATE_VIDEO,
+    id,
+    rate
   };
 }

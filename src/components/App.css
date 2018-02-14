@@ -1,15 +1,6 @@
-.App {
-}
-
-.App-header {
-  background-color: #ff0000;
-  height: 50px;
-  padding: 20px;
-  color: white;
-}
-
-.App-title {
-  font-size: 1.5em;
+.App-container {
+  display: flex;
+  margin-top: 100px;
 }
 
 .App-map {
