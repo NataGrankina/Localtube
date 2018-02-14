@@ -23,18 +23,29 @@ export default class Map extends Component {
 
   componentDidMount() {
     if (navigator.geolocation) {
-      navigator.geolocation.getCurrentPosition((position) => {
-        const { coords: { latitude: lat, longitude: lng } } = position;
-        this.setState({
-          center: { lat, lng },
-          isGettingCurrentLocation: false
-        });
-        this.props.selectLocation(lat, lng);
-      });
+      navigator.geolocation.getCurrentPosition(
+        this.setCurrentLocation,
+        this.onGettingCurrentLocationDenied
+      );
     }
   }
 
+  onGettingCurrentLocationDenied = () => {
+    this.setState({
+      isGettingCurrentLocation: false
+    });
+  };
+
   onMapClick = ({ lat, lng }) => {
+    this.props.selectLocation(lat, lng);
+  };
+
+  setCurrentLocation = (position) => {
+    const { coords: { latitude: lat, longitude: lng } } = position;
+    this.setState({
+      center: { lat, lng },
+      isGettingCurrentLocation: false
+    });
     this.props.selectLocation(lat, lng);
   };
 
