@@ -4,8 +4,8 @@ import { selectLocation } from 'actions/mapActions';
 import Map from './Map';
 
 const mapStateToProps = (state) => {
-  const { map: { lat, lng } } = state;
-  return { lat, lng };
+  const { map: { lat, lng, radius } } = state;
+  return { lat, lng, radius };
 };
 
 const mapDispatchToProps = dispatch =>

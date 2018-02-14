@@ -3,18 +3,32 @@ import PropTypes from 'prop-types';
 import GoogleMap from 'google-map-react';
 import { GOOGLE_API_KEY } from 'config';
 import LocationMarker from './locationMarker';
+import './Map.css';
 
 export default class Map extends Component {
   static props = {
     lat: PropTypes.number.isRequired,
     lng: PropTypes.number.isRequired,
+    radius: PropTypes.number.isRequired,
     selectLocation: PropTypes.func.isRequired
+  };
+
+  state = {
+    center: {
+      lat: 52.52,
+      lng: 13.34
+    },
+    isGettingCurrentLocation: !!navigator.geolocation
   };
 
   componentDidMount() {
     if (navigator.geolocation) {
       navigator.geolocation.getCurrentPosition((position) => {
         const { coords: { latitude: lat, longitude: lng } } = position;
+        this.setState({
+          center: { lat, lng },
+          isGettingCurrentLocation: false
+        });
         this.props.selectLocation(lat, lng);
       });
     }
@@ -25,16 +39,26 @@ export default class Map extends Component {
   };
 
   render() {
-    const { lat, lng } = this.props;
+    const { lat, lng, radius } = this.props;
+    const { center, isGettingCurrentLocation } = this.state;
+
+    const description = isGettingCurrentLocation
+      ? 'Retrieving current position...'
+      : `Click on any location at the map to search for the latest Youtube videos in radius ${radius}km`;
+
     return (
-      <GoogleMap
-        bootstrapURLKeys={{ key: GOOGLE_API_KEY }}
-        center={{ lat, lng }}
-        defaultZoom={11}
-        onClick={this.onMapClick}
-      >
-        <LocationMarker lat={lat} lng={lng} />
-      </GoogleMap>
+      <div className="Map-container">
+        {description}
+        <GoogleMap
+          bootstrapURLKeys={{ key: GOOGLE_API_KEY }}
+          center={center}
+          defaultZoom={11}
+          fullscreenControl={false}
+          onClick={this.onMapClick}
+        >
+          <LocationMarker lat={lat} lng={lng} />
+        </GoogleMap>
+      </div>
     );
   }
 }
