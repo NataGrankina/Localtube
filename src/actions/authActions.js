@@ -22,11 +22,12 @@ export function initGoogleApiRequest() {
   };
 }
 
-export function initGoogleApiSuccess(isAuthorized, user) {
+export function initGoogleApiSuccess(isAuthorized, user, token) {
   return {
     type: INIT_GOOGLE_API.SUCCESS,
     isAuthorized,
-    user
+    user,
+    token
   };
 }
 
@@ -43,11 +44,12 @@ export function loginRequest() {
   };
 }
 
-export function loginSuccess(isAuthorized, user) {
+export function loginSuccess(isAuthorized, user, token) {
   return {
     type: LOGIN.SUCCESS,
     isAuthorized,
-    user
+    user,
+    token
   };
 }
 

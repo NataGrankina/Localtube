@@ -17,8 +17,11 @@ function getGoogleAuthInfo(googleUser) {
       nickname: googleUser.w3.ig
     }
     : null;
+  const token = isAuthorized
+    ? `${googleUser.Zi.token_type} ${googleUser.Zi.access_token}`
+    : null;
 
-  return { user, isAuthorized };
+  return { user, isAuthorized, token };
 }
 
 function initGoogleApi() {

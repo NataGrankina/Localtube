@@ -4,6 +4,7 @@ const initialState = {
   isGoogleApiInit: false,
   isAuthorized: false,
   user: null,
+  token: null,
   error: null
 };
 
@@ -14,19 +15,22 @@ export default (state = initialState, action = {}) => {
         ...state,
         isGoogleApiInit: true,
         isAuthorized: action.isAuthorized,
-        user: action.user
+        user: action.user,
+        token: action.token
       };
     case LOGIN.SUCCESS:
       return {
         ...state,
         isAuthorized: action.isAuthorized,
-        user: action.user
+        user: action.user,
+        token: action.token
       };
     case LOGOUT.SUCCESS:
       return {
         ...state,
         isAuthorized: false,
-        user: null
+        user: null,
+        token: null
       };
     case INIT_GOOGLE_API.FAILURE:
     case LOGIN.FAILURE:

@@ -14,8 +14,8 @@ import { authService } from 'services';
 
 function* initGoogleApi() {
   try {
-    const { isAuthorized, user } = yield call(authService.initGoogleApi);
-    yield put(initGoogleApiSuccess(isAuthorized, user));
+    const { isAuthorized, user, token } = yield call(authService.initGoogleApi);
+    yield put(initGoogleApiSuccess(isAuthorized, user, token));
   } catch (error) {
     yield put(initGoogleApiFailure(error));
   }
@@ -23,8 +23,8 @@ function* initGoogleApi() {
 
 function* login() {
   try {
-    const { isAuthorized, user } = yield call(authService.signIn);
-    yield put(loginSuccess(isAuthorized, user));
+    const { isAuthorized, user, token } = yield call(authService.signIn);
+    yield put(loginSuccess(isAuthorized, user, token));
   } catch (error) {
     yield put(loginFailure(error));
   }
