@@ -14,6 +14,8 @@ import {
 } from 'actions/youtubeActions';
 import { videosService } from 'services';
 
+export const authSelector = state => state.auth.token;
+
 function* loadVideosByLocation({ lat, lng, radius }) {
   try {
     const { videos, resultsNumber } = yield call(
@@ -29,7 +31,7 @@ function* loadVideosByLocation({ lat, lng, radius }) {
 }
 
 function* rateVideo({ id, rating }) {
-  const token = yield select(state => state.auth.token);
+  const token = yield select(authSelector);
   try {
     yield call(videosService.rateVideo, token, id, rating);
     yield put(rateVideoSuccess(id, rating));
@@ -45,8 +47,8 @@ function* expandVideoDetails({ id }) {
   yield put(loadVideoRatingRequest(id));
 }
 
-function* loadVideoRating({ id }) {
-  const token = yield select(state => state.auth.token);
+export function* loadVideoRating({ id }) {
+  const token = yield select(authSelector);
   try {
     const rating = yield call(videosService.loadVideoRating, token, id);
     yield put(loadVideoRatingSuccess(id, rating));
