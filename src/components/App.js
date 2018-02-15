@@ -10,12 +10,14 @@ class App extends Component {
     return (
       <div className="App">
         <GapiInjector />
-        <Header />
+        <div className="App-header">
+          <Header />
+        </div>
         <div className="App-container">
           <div className="App-map">
             <Map />
           </div>
-          <div>
+          <div className="App-videoList">
             <VideoList />
           </div>
         </div>

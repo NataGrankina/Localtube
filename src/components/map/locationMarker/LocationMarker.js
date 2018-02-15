@@ -1,20 +1,14 @@
-import React, { Component } from 'react';
-import youtubeLogo from 'icons/youtube.svg';
+import React from 'react';
+import './LocationMarker.css';
 
-export default class LocationMarker extends Component {
-  render() {
-    const markerWidth = 20;
-    const markerStyle = {
-      left: -markerWidth / 2,
-      top: -markerWidth / 2,
-      width: markerWidth,
-      height: markerWidth
-    };
+export default function LocationMarker() {
+  const markerWidth = 14;
+  const markerStyle = {
+    left: -markerWidth / 2,
+    top: -markerWidth / 2,
+    width: markerWidth,
+    height: markerWidth
+  };
 
-    return (
-      <div className="LocationMarker">
-        <img src={youtubeLogo} style={markerStyle} alt="marker" />
-      </div>
-    );
-  }
+  return <div className="LocationMarker" style={markerStyle} />;
 }

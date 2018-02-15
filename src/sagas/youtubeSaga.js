@@ -16,13 +16,13 @@ import { videosService } from 'services';
 
 function* loadVideosByLocation({ lat, lng, radius }) {
   try {
-    const videos = yield call(
+    const { videos, resultsNumber } = yield call(
       videosService.loadVideosByLocation,
       lat,
       lng,
       radius
     );
-    yield put(loadVideosByLocationSuccess(videos));
+    yield put(loadVideosByLocationSuccess(videos, resultsNumber));
   } catch (error) {
     yield put(loadVideosByLocationFailure(error));
   }
@@ -51,8 +51,6 @@ function* loadVideoRating({ id }) {
     const rating = yield call(videosService.loadVideoRating, token, id);
     yield put(loadVideoRatingSuccess(id, rating));
   } catch (error) {
-    console.log(error);
-    debugger; // eslint-disable-line
     yield put(loadVideoRatingFailure(id, error));
   }
 }

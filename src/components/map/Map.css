@@ -1,4 +1,16 @@
 .Map-container {
   height: 100%;
-  width: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.Map-googleMap {
+  flex: 1 1 0;
+  display: flex;
+}
+
+/* Hack to fix incorrect 100% height within a flex item in a flex-item child for Safari
+issue: https://github.com/philipwalton/flexbugs/issues/197 */
+.Map-googleMap > div {
+  height: auto !important;
 }

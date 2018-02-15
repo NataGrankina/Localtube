@@ -1,0 +1,17 @@
+.RatingDetails-button {
+  border-radius: 50%;
+  width: 30px;
+  height: 30px;
+}
+
+.RatingDetails-counter {
+  margin-left: 5px;
+}
+
+.RatingDetails-group {
+  display: inline-block;
+}
+
+.RatingDetails-group:not(:first-child) {
+  margin-left: 10px;
+}

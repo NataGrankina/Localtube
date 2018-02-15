@@ -1,9 +1,45 @@
-.App-container {
-  display: flex;
-  margin-top: 100px;
+@media (min-width: 600px) {
+  .App {
+    color: #333;
+  }
+
+  .App-container {
+    margin-top: 60px;
+    padding: 15px;
+  }
+
+  .App-map {
+    position: fixed;
+    bottom: 0;
+    top: 60px;
+    left: 0;
+    width: calc(40% - 15px);
+    padding: 15px;
+    box-sizing: border-box;
+  }
+
+  .App-videoList {
+    width: 60%;
+    margin-left: 40%;
+    overflow-y: auto;
+  }
 }
 
-.App-map {
-  width: 300px;
-  height: 200px;
+@media (max-width: 600px) {
+  .App-container {
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+    padding: 15px;
+    padding-top: 0;
+  }
+
+  .App-map {
+    margin-top: 15px;
+    height: 400px;
+  }
+
+  .App-videoList {
+    margin-top: 15px;
+  }
 }

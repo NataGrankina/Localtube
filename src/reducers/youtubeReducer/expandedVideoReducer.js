@@ -60,7 +60,6 @@ export default (state = initialState, action = {}) => {
         const { userRating } = state;
         const { rating } = action;
 
-        // TODO ??
         userRating === VIDEO_RATING_TYPES.LIKE && likeCount--;
         userRating === VIDEO_RATING_TYPES.DISLIKE && dislikeCount--;
         rating === VIDEO_RATING_TYPES.LIKE && likeCount++;

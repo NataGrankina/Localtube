@@ -24,10 +24,11 @@ export function loadVideosByLocationRequest(lat, lng, radius) {
   };
 }
 
-export function loadVideosByLocationSuccess(videos) {
+export function loadVideosByLocationSuccess(videos, resultsNumber) {
   return {
     type: LOAD_VIDEOS_BY_LOCATION.SUCCESS,
-    videos
+    videos,
+    resultsNumber
   };
 }
 

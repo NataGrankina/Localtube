@@ -5,12 +5,19 @@ import VideoList from './VideoList';
 
 const mapStateToProps = (state) => {
   const {
-    youtube: { videosList: { videos, isLoading, error }, expandedVideo }
+    youtube: {
+      videosList: {
+        videos, resultsNumber, isLoading, isLoaded, error
+      },
+      expandedVideo
+    }
   } = state;
   return {
     videos,
+    resultsNumber,
     expandedVideo,
     isLoading,
+    isLoaded,
     error
   };
 };

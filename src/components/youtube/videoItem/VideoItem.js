@@ -1,9 +1,10 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { VIDEO_RATING_TYPES } from 'utils';
+import { getViewVideoLink } from 'utils';
+import Button from 'components/base/button';
+import RatingDetails from './ratingDetails';
 import './VideoItem.css';
 
-// TODO: Consider to exract expanded state in a different component
 export default class VideoItem extends Component {
   static props = {
     item: PropTypes.object, // TODO: improve types here,
@@ -13,71 +14,66 @@ export default class VideoItem extends Component {
     rateVideo: PropTypes.func.isRequired
   };
 
-  rateVideo(rating) {
-    const calculatedRating =
-      rating === this.props.details.userRating
-        ? VIDEO_RATING_TYPES.NONE
-        : rating;
-    this.props.rateVideo(this.props.item.id, calculatedRating);
-  }
-
   expandDetails = () => {
     this.props.expandVideoDetails(this.props.item.id);
   };
 
-  like = () => {
-    this.rateVideo(VIDEO_RATING_TYPES.LIKE);
-  };
-
-  dislike = () => {
-    this.rateVideo(VIDEO_RATING_TYPES.DISLIKE);
-  };
-
   renderDetails() {
     if (!this.props.isExpanded) {
-      return <button onClick={this.expandDetails}>Expand details</button>;
+      return (
+        <Button className="Item-details-expand" onClick={this.expandDetails}>
+          Expand details
+        </Button>
+      );
     }
 
-    const { userRating, isLoading, statistics } = this.props.details;
+    const { item: { id }, details, rateVideo } = this.props;
+    const {
+      userRating, isLoading, statistics, error
+    } = details;
 
     if (isLoading) {
-      return <div>Loading rating...</div>;
+      return <div className="Item-ratingDetails">Loading rating...</div>;
     }
 
-    const { likeCount, dislikeCount } = statistics;
+    if (error) {
+      return <div className="Item-ratingDetails">Error happened</div>;
+    }
 
     return (
-      <div>
-        <button onClick={this.like}>
-          {userRating === VIDEO_RATING_TYPES.LIKE ? 'Unlike' : 'Like'}
-        </button>
-        <span>{likeCount} likes</span>
-        <button onClick={this.dislike}>
-          {userRating === VIDEO_RATING_TYPES.DISLIKE ? 'Undislike' : 'Dislike'}
-        </button>
-        <span>{dislikeCount} dislikes</span>
-      </div>
+      <RatingDetails
+        id={id}
+        className="Item-ratingDetails"
+        statistics={statistics}
+        userRating={userRating}
+        rateVideo={rateVideo}
+      />
     );
   }
 
   render() {
     const {
       item: {
-        thumbnail: { url, height, width },
-        title,
-        description,
-        publishedAt
+        id, thumbnail: { url }, title, description, publishedAt
       }
     } = this.props;
     return (
       <div className="Item-container">
         <div>
-          <img src={url} style={{ height, width }} alt="thumbnail" />
+          <img src={url} height="110" alt={title} />
         </div>
         <div className="Item-details">
-          <div>{title}</div>
-          <div>{description}</div>
-          <div>Published at {publishedAt}</div>
+          <a
+            className="Item-details-title"
+            href={getViewVideoLink(id)}
+            target="_blank"
+          >
+            {title}
+          </a>
+          <div className="Item-details-description">{description}</div>
+          <div className="Item-details-published">
+            Published at {publishedAt.toLocaleString()}
+          </div>
           {this.renderDetails()}
         </div>
       </div>

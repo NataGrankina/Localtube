@@ -3,6 +3,53 @@
   flex: 1;
 }
 
+.Item-container:not(:first-child) {
+  margin-top: 15px;
+}
+
 .Item-details {
   flex: 1;
+  margin-left: 10px;
+}
+
+.Item-details-title {
+  display: block;
+  overflow: hidden;
+  color: inherit;
+  font-size: 1.1em;
+  font-weight: 500;
+  line-height: 1.2em;
+  max-height: 1.2em;
+}
+
+.Item-details-description {
+  overflow: hidden;
+  margin-top: 5px;
+  color: #a0a0a0;
+  font-size: 0.9em;
+  line-height: 1em;
+  max-height: 2em;
+}
+
+.Item-details-published {
+  overflow: hidden;
+  margin-top: 5px;
+  color: #a0a0a0;
+  font-size: 0.9em;
+  line-height: 1em;
+  max-height: 1em;
+}
+
+.Item-details-expand {
+  margin-top: 5px;
+  color: #a0a0a0;
+  font-size: 0.9em;
+  padding-left: 0;
+  padding-right: 0;
+}
+
+.Item-ratingDetails {
+  margin-top: 5px;
+  color: #a0a0a0;
+  font-size: 0.9em;
 }

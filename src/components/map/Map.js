@@ -5,6 +5,10 @@ import { GOOGLE_API_KEY } from 'config';
 import LocationMarker from './locationMarker';
 import './Map.css';
 
+const googleMapOptions = () => ({
+  fullscreenControl: false
+});
+
 export default class Map extends Component {
   static props = {
     lat: PropTypes.number.isRequired,
@@ -59,16 +63,18 @@ export default class Map extends Component {
 
     return (
       <div className="Map-container">
-        {description}
-        <GoogleMap
-          bootstrapURLKeys={{ key: GOOGLE_API_KEY }}
-          center={center}
-          defaultZoom={11}
-          fullscreenControl={false}
-          onClick={this.onMapClick}
-        >
-          <LocationMarker lat={lat} lng={lng} />
-        </GoogleMap>
+        <h3>{description}</h3>
+        <div className="Map-googleMap">
+          <GoogleMap
+            bootstrapURLKeys={{ key: GOOGLE_API_KEY }}
+            center={center}
+            defaultZoom={11}
+            options={googleMapOptions}
+            onClick={this.onMapClick}
+          >
+            <LocationMarker lat={lat} lng={lng} />
+          </GoogleMap>
+        </div>
       </div>
     );
   }

@@ -3,14 +3,13 @@ import { GOOGLE_API_KEY, YOUTUBE_API_URL } from 'config';
 import { VIDEO_RATING_TYPES } from 'utils';
 
 const client = axios.create({
-  baseURL: YOUTUBE_API_URL,
-  timeout: 1000
+  baseURL: YOUTUBE_API_URL
 });
 
 function transformVideosResponse({ data }) {
   const { items } = data;
 
-  return items.map((item) => {
+  const videos = items.map((item) => {
     const {
       id: { videoId: id },
       snippet: {
@@ -24,10 +23,12 @@ function transformVideosResponse({ data }) {
       id,
       title,
       description,
-      publishedAt,
+      publishedAt: new Date(publishedAt),
       thumbnail
     };
   });
+
+  return { videos, resultsNumber: data.pageInfo.totalResults };
 }
 
 function loadVideosByLocation(ltd, lng, radius) {
@@ -39,6 +40,7 @@ function loadVideosByLocation(ltd, lng, radius) {
         locationRadius: `${radius}km`,
         order: 'date',
         type: 'video',
+        maxResults: 50,
         key: GOOGLE_API_KEY
       }
     })
